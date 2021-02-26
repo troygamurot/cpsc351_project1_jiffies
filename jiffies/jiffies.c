@@ -15,6 +15,9 @@
 #include <linux/kernel.h>
 #include <linux/proc_fs.h>
 #include <asm/uaccess.h>
+#include <linux/hash.h>
+#include <linux/gcd.h> 
+#include <asm/param.h>
 #include <linux/jiffies.h>
 
 #define BUFFER_SIZE 128
@@ -41,8 +44,8 @@ int proc_init(void)
         // proc_create_data() passing NULL as the last argument
         proc_create(PROC_NAME, 0, NULL, &proc_ops);
 
-        printk(KERN_INFO "/proc/%s created\n", PROC_NAME);
-        printk(KERN_INFO "Golden Ratio Prime is: %lu\n", GOLDEN_RATIO_PRIME);
+        printk( KERN_INFO "/proc/%s created\n", PROC_NAME);
+        printk( KERN_INFO "Golden Ratio Prime is: %lu\n", GOLDEN_RATIO_PRIME);
 
 	return 0;
 }
@@ -52,8 +55,8 @@ void proc_exit(void) {
 
         // removes the /proc/hello entry
         remove_proc_entry(PROC_NAME, NULL);
-        
-        printk(KERN_INFO "GCD of 3300 and 24 is: %lu\n", gcd(3300,24));
+
+        printk( KERN_INFO "GCD of 3300 and 24 is: %lu\n", gcd(3300,24));
         printk( KERN_INFO "/proc/%s removed\n", PROC_NAME);
 }
 
