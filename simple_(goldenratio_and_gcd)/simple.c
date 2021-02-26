@@ -17,13 +17,14 @@
 int simple_init(void)
 {
        printk(KERN_INFO "Loading Module\n");
+       printk(KERN_INFO "%lu n", GOLDEN_RATIO_PRIME);
 
        return 0;
 }
 
 /* This function is called when the module is removed. */
 void simple_exit(void) {
-       printk(KERN_INFO "%lu n", GOLDEN_RATIO_PRIME);
+       unsigned long gcd(unsigned long a, unsigned b);
 	printk(KERN_INFO "Removing Module\n");
 }
 
