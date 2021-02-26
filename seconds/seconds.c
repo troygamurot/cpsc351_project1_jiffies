@@ -24,6 +24,8 @@
 
 #define PROC_NAME "seconds"
 
+long first_jiffies = 0;
+
 /**
  * Function prototypes
  */
@@ -46,6 +48,8 @@ int proc_init(void)
 
         printk( KERN_INFO "/proc/%s created\n", PROC_NAME);
         printk( KERN_INFO "Golden Ratio Prime is: %lu\n", GOLDEN_RATIO_PRIME);
+
+        first_jiffies = jiffies;
 
 	return 0;
 }
@@ -88,7 +92,7 @@ ssize_t proc_read(struct file *file, char __user *usr_buf, size_t count, loff_t 
 
         completed = 1;
 
-        rv = sprintf(buffer, "Current Jiffies Value: %lu\n", jiffies);
+        rv = sprintf(buffer, "Seconds taken: %lu\n",((jiffies-first_jiffies)/HZ));
 
         // copies the contents of buffer to userspace usr_buf
         copy_to_user(usr_buf, buffer, rv);
